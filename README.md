@@ -19,4 +19,5 @@ Crear una página web interactiva para mostrar imágenes de forma atractiva. La 
 * **Reproducción de Música con Spotify (Opcional):** Permite escuchar música de Spotify mientras se ven las imágenes.
 
 **Estructura:**
+
 ![image](https://github.com/user-attachments/assets/11ca10f9-6a5d-4dc1-a253-3cf2f345b705)

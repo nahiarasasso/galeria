@@ -1,0 +1,238 @@
+/* Estilos generales y reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea los elementos desde la parte superior */
+    align-items: center;
+    min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif; /* Fuente moderna y legible */
+    background-color: #f4f7f6; /* Un tono de fondo mas suave */
+    color: #333; /* Color de texto predeterminado */
+    padding-top: 60px; /* Aumenta el espacio superior */
+}
+
+.dark-mode {
+    background-color: #1e1e1e; /* Gris oscuro para el modo oscuro */
+    color: #eee;
+}
+
+/* Estilos del contenedor del slider */
+.slider-container {
+    width: 95%; /* Ocupa un poco mas de ancho */
+    max-width: 900px; /* Aumenta el ancho máximo */
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px; /* Bordes aún más redondeados */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada y moderna */
+    margin-bottom: 50px; /* Mas espacio debajo del slider */
+}
+
+/* Estilos del slider */
+.slider {
+    display: flex;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición suave y moderna */
+}
+
+/* Estilos de cada slide */
+.slide {
+    min-width: 100%;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px; /* Bordes redondeados consistentes */
+    cursor: pointer;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out; /* Transiciones adicionales */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Sombra suave en las imagenes */
+}
+
+.slide img:hover {
+    transform: scale(1.03); /* Ligero aumento al pasar el mouse, mas sutil */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Sombra mas intensa al pasar el mouse */
+}
+
+/* Estilos de los botones de navegacion */
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6); /* Fondo ligeramente mas transparente */
+    color: white;
+    border: none;
+    padding: 16px 20px; /* Aumenta el padding */
+    cursor: pointer;
+    border-radius: 10px; /* Bordes redondeados para los botones */
+    font-size: 1.4em; /* Aumenta el tamaño de la fuente */
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* Añade transicion a la opacidad */
+    opacity: 0.7; /* Opacidad inicial ligeramente menor */
+}
+
+.prev:hover,
+.next:hover {
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 1; /* Opacidad completa al pasar el mouse */
+}
+
+.prev {
+    left: 30px; /* Aumenta la distancia del borde */
+}
+
+.next {
+    right: 30px; /* Aumenta la distancia del borde */
+}
+
+/* Estilos del botón de pantalla completa */
+.fullscreen-btn {
+    position: absolute;
+    top: 25px; /* Ajusta la posicion */
+    right: 25px; /* Ajusta la posicion */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo mas transparente */
+    color: white;
+    border: none;
+    padding: 12px; /* Aumenta el padding */
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.2em; /* Aumenta el tamaño de la fuente */
+    opacity: 0.6; /* Opacidad inicial menor */
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.fullscreen-btn:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Estilos para la vista en pantalla completa */
+.fullscreen-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95); /* Fondo mas oscuro y envolvente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out; /* Transición ligeramente mas rápida */
+}
+
+.fullscreen-image-container.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.fullscreen-image-container img {
+    max-width: 95%; /* Ocupa mas espacio en pantalla completa */
+    max-height: 95%; /* Ocupa mas espacio en pantalla completa */
+    object-fit: contain;
+    border-radius: 16px; /* Bordes redondeados consistentes */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); /* Sombra mas pronunciada */
+}
+
+.close-btn {
+    position: absolute;
+    top: 30px; /* Ajusta la posicion */
+    right: 30px; /* Ajusta la posicion */
+    background: rgba(255, 255, 255, 0.9); /* Fondo ligeramente más transparente */
+    color: #333;
+    border: none;
+    padding: 14px 18px; /* Aumenta el padding */
+    cursor: pointer;
+    font-size: 1.5em; /* Aumenta el tamaño de la fuente */
+    border-radius: 50%;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.close-btn:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* Estilos del botón de alternar entre modos */
+.mode-toggle {
+    position: fixed;
+    top: 30px; /* Ajusta la posición */
+    right: 30px; /* Ajusta la posición */
+    background-color: #333; /* Color base más oscuro */
+    color: white;
+    border: none;
+    padding: 14px; /* Aumenta el padding */
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.4em; /* Aumenta el tamaño de la fuente */
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    opacity: 0.7;
+}
+
+.dark-mode .mode-toggle {
+    background-color: #eee;
+    color: #333;
+}
+
+.mode-toggle:hover {
+    opacity: 1;
+    background-color: #555;
+}
+
+.dark-mode .mode-toggle:hover {
+    background-color: #ddd;
+}
+
+/* Estilos del contenedor del reproductor de Spotify */
+.spotify-container {
+    width: 95%; /* Ocupa un poco más de ancho */
+    max-width: 750px; /* Aumenta el ancho máximo */
+    margin-bottom: 70px; /* Más espacio debajo del reproductor */
+}
+
+iframe {
+    width: 100%;
+    border-radius: 16px; /* Bordes más redondeados */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra suave en el iframe */
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .prev {
+        left: 15px;
+    }
+    .next {
+        right: 15px;
+    }
+    .fullscreen-btn {
+        top: 15px;
+        right: 15px;
+        padding: 8px;
+        font-size: 1em;
+    }
+    .close-btn {
+        top: 25px;
+        right: 25px;
+        padding: 10px 14px;
+        font-size: 1.3em;
+    }
+    .mode-toggle {
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        font-size: 1.2em;
+    }
+    .spotify-container {
+        margin-bottom: 50px;
+    }
+}
